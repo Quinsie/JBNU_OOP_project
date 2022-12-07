@@ -21,7 +21,7 @@
 ### 22-12-07 (수)
 
 #### 브레인스토밍
-+ 창 띄우기 https://studydeveloper.tistory.com/5
++ 1600x900 창 띄우기 https://studydeveloper.tistory.com/5
 
 #### 화면 기본 배치 설정
 * 1600x900 화면을 기반으로 제작.
