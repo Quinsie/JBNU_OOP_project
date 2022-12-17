@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 //////////////
 
-public class gui_temp extends JFrame {
+public class Gui_temp extends JFrame {
 	
 	public static void main(String[] args) {
 		
@@ -57,6 +57,9 @@ public class gui_temp extends JFrame {
 		
 		f.add(drawpanel); //draw panel을 frame에 추가
 		
+		f.getContentPane().add(drawpanel);
+		f.setVisible(true);
+		
 		
 		//내 성적 입력
 //		String data[][] = {
@@ -72,92 +75,92 @@ public class gui_temp extends JFrame {
 		//학점 관리
 		//표 만들기 : 과목 최대 8개 (전진설 포함)
 		//과목 학점 계산해서 총 학점에서 제외
-		String header1[] = {"과목", "성적", "학점", "교양/전공/일선"}; //표 제목줄
-		String data1[][] = {
-				{"대진설", "P", "0.5", "기타"}
-		};
+//		String header1[] = {"과목", "성적", "학점", "교양/전공/일선"}; //표 제목줄
+//		String data1[][] = {
+//				{"대진설", "P", "0.5", "기타"}
+//		};
 		
-		DefaultTableModel model = new DefaultTableModel(data1, header1);
-		JTable table1 = new JTable(model);
-		JScrollPane scrollpane1 = new JScrollPane(table1);
+//		DefaultTableModel model = new DefaultTableModel(data1, header1);
+//		JTable table1 = new JTable(model);
+//		JScrollPane scrollpane1 = new JScrollPane(table1);
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		
-		
-		JTextField nameField = new JTextField(5);
-		JTextField sbj1 = new JTextField(3);
-		JTextField sbj2 = new JTextField(3);
-		JTextField sbj3 = new JTextField(3);
-		
-		panel.add(nameField);
-		panel.add(sbj1);
-		panel.add(sbj2);
-		panel.add(sbj3);
-		
-		JButton addBtn = new JButton("추가");
-		
-		addBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				String inputStr[] = new String[4];
-				
-				inputStr[0] = nameField.getText();
-				inputStr[1] = sbj1.getText();
-				inputStr[2] = sbj2.getText();
-				inputStr[3] = sbj3.getText();
-				
-				model.addRow(inputStr);
-				
-				nameField.setText("");
-				sbj1.setText("");
-				sbj2.setText("");
-				sbj3.setText("");
-				
-			}
-		});// addActionListener
-		
-		JButton cancelBtn = new JButton("삭제");
-		
-		 cancelBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if(table1.getSelectedRow() == -1) {
-					return;
-				}
-				else {
-					model.removeRow(table1.getSelectedRow());
-				}
-				
-			}
-		});
-		 
-		 panel.add(addBtn);
-		 panel.add(cancelBtn);
-		 
-		 f.add(scrollpane1, BorderLayout.CENTER);
-		 f.add(panel, BorderLayout.SOUTH);
-		 f.pack();
-		 f.setVisible(true);
-		 
-		 //////////////////////////////////////////////////////////////////////////
-		 
-		
-		//우리 과 졸업학점 : 교양 38 / 전필 18 / 전선 + 심화전공 60 / 총 140
-		//우리과 졸업학점 표
-		String header2[] = {"교양", "전공필수", "전공선택", "심화전공", "졸업학점"};
-		String data[][] = {
-				{"38", "18", "30", "30", "140"}
-		};
-		
-		JTable table2 = new JTable(data, header2);
-		JScrollPane scrollpane2 = new JScrollPane(table2);
-		f.add(scrollpane2);
-		
+//		JPanel panel = new JPanel();
+//		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+//		
+//		
+//		JTextField nameField = new JTextField(5);
+//		JTextField sbj1 = new JTextField(3);
+//		JTextField sbj2 = new JTextField(3);
+//		JTextField sbj3 = new JTextField(3);
+//		
+//		panel.add(nameField);
+//		panel.add(sbj1);
+//		panel.add(sbj2);
+//		panel.add(sbj3);
+//		
+//		JButton addBtn = new JButton("추가");
+//		
+//		addBtn.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				String inputStr[] = new String[4];
+//				
+//				inputStr[0] = nameField.getText();
+//				inputStr[1] = sbj1.getText();
+//				inputStr[2] = sbj2.getText();
+//				inputStr[3] = sbj3.getText();
+//				
+//				model.addRow(inputStr);
+//				
+//				nameField.setText("");
+//				sbj1.setText("");
+//				sbj2.setText("");
+//				sbj3.setText("");
+//				
+//			}
+//		});// addActionListener
+//		
+//		JButton cancelBtn = new JButton("삭제");
+//		
+//		 cancelBtn.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				if(table1.getSelectedRow() == -1) {
+//					return;
+//				}
+//				else {
+//					model.removeRow(table1.getSelectedRow());
+//				}
+//				
+//			}
+//		});
+//		 
+//		 panel.add(addBtn);
+//		 panel.add(cancelBtn);
+//		 
+//		 f.add(scrollpane1, BorderLayout.CENTER);
+//		 f.add(panel, BorderLayout.SOUTH);
+//		 f.pack();
+//		 f.setVisible(true);
+//		 
+//		 //////////////////////////////////////////////////////////////////////////
+//		 
+//		
+//		//우리 과 졸업학점 : 교양 38 / 전필 18 / 전선 + 심화전공 60 / 총 140
+//		//우리과 졸업학점 표
+//		String header2[] = {"교양", "전공필수", "전공선택", "심화전공", "졸업학점"};
+//		String data[][] = {
+//				{"38", "18", "30", "30", "140"}
+//		};
+//		
+//		JTable table2 = new JTable(data, header2);
+//		JScrollPane scrollpane2 = new JScrollPane(table2);
+//		f.add(scrollpane2);
+//		
 		
 		//내가 들어야 할 학점 표
 		
