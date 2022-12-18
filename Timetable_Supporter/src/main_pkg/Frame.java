@@ -2,6 +2,7 @@ package main_pkg;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -31,6 +32,7 @@ public class Frame extends JFrame
 		createTimetable();
 		createTimetableTitle();
 		createStatus();
+		createItemButton();
 		
 		this.setVisible(true);
 	}
@@ -75,7 +77,7 @@ public class Frame extends JFrame
 	
 	public void createTimetableTitle() {
 		JPanel title = new JPanel();
-		title.setBounds(30, 7, 1000, 50);
+		title.setBounds(30, 10, 1000, 50);
 		title.setLayout(null);
 		
 		JLabel text = new JLabel();
@@ -100,5 +102,31 @@ public class Frame extends JFrame
 		status.add(text, BorderLayout.CENTER);
 		
 		this.add(status);
+	}
+	
+	public void createItemButton() {
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setBounds(650, 20, 580, 580);
+		buttonPanel.setLayout(null);
+		
+		for (int i = 0; i < 4; i++) {
+			JButton temp = new JButton();
+			
+			if (i == 0) {
+				temp.setText("시간표 검사");
+			} else if (i == 1) {
+				temp.setText("수강 가능 과목");
+			} else if (i == 2) {
+				temp.setText("과목 추천");
+			} else {
+				temp.setText("재수강 추천");
+			}
+			
+			temp.setFont(font3);
+			buttonPanel.add(temp);
+			temp.setBounds(148 * i, 0, 135, 40);
+		}
+		
+		this.add(buttonPanel);
 	}
 }
