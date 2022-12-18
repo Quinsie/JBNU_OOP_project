@@ -1,4 +1,4 @@
-package main_pkg;
+package gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,6 +11,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+
+import gui.Window.*;
 
 public class Frame extends JFrame implements ActionListener
 {
@@ -193,37 +195,38 @@ public class Frame extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) { // button action
 		// TODO Auto-generated method stub
-		if (e.getSource() == fileMenuItem[2]) { // exit button
-			System.exit(0);
-		}
-		else if (e.getSource() == timetableButton[0]) setTimetable();
+		if (e.getSource() == fileMenuItem[2]) System.exit(0); // exit button
+		else if (e.getSource() == timetableButton[0]) setTimetable(e);
 		else if (e.getSource() == timetableButton[1]) setVoidTimetable();
-		else if (e.getSource() == itemButton[0]) analyze();
-		else if (e.getSource() == itemButton[1]) { // 수강 가능 과목 알림
-			Window subWindow = new Window(e.getActionCommand());
-		}
-		else if (e.getSource() == itemButton[2]) { // 과목 추천 분석
-			Window subWindow = new Window(e.getActionCommand());
-		}
-		else if (e.getSource() == itemButton[3]) { // 재수강 추천 분석
-			Window subWindow = new Window(e.getActionCommand());
-		}
+		else if (e.getSource() == itemButton[0]) analyze(e);
+		else if (e.getSource() == itemButton[1]) numberClass(e);
+		else if (e.getSource() == itemButton[2]) recommendClass(e);
+		else if (e.getSource() == itemButton[3]) retryClass(e);
 		
 	}
 	
-	private void analyze() {
-		statusText.setText("분석 완료!");
-	}
-	
-	private void setTimetable() {
+	private void setTimetable(ActionEvent e) {
+		SetTimetableWindow wtemp = new SetTimetableWindow(e.getActionCommand());
 		timetableImage.setText("시간표 변경!");
 		timetableImage.setVerticalAlignment(JLabel.CENTER);
 		timetableImage.setHorizontalAlignment(JLabel.CENTER);
 	}
-	
 	private void setVoidTimetable() { 
 		timetableImage.setText("시간표를 추가해주세요!");
 		timetableImage.setVerticalAlignment(JLabel.CENTER);
 		timetableImage.setHorizontalAlignment(JLabel.CENTER);
 	}
+	private void analyze(ActionEvent e) {
+		statusText.setText("분석 완료!");
+	}
+	private void numberClass(ActionEvent e) {
+		NumberClassWindow wtemp = new NumberClassWindow(e.getActionCommand());
+	}
+	private void recommendClass(ActionEvent e) {
+		RecommendClassWindow wtemp = new RecommendClassWindow(e.getActionCommand());
+	}
+	private void retryClass(ActionEvent e) {
+		RetryClassWindow wtemp = new RetryClassWindow(e.getActionCommand());
+	}
+
 }

@@ -1,4 +1,4 @@
-package main_pkg;
+package gui;
 
 import java.awt.Color;
 import java.awt.FontMetrics;

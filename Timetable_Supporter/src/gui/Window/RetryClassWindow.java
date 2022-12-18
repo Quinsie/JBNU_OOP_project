@@ -1,16 +1,18 @@
-package main_pkg;
+package gui.Window;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-public class Window extends JDialog
+import gui.Frame;
+
+public class RetryClassWindow extends JDialog 
 {
 	// Fields
 	JLabel templib = new JLabel();
 	String text;
 	
 	// Constructor
-	public Window(String str) {
+	public RetryClassWindow(String str) {
 		text = str + " has been pressed!";
 		
 		getContentPane().add(templib);

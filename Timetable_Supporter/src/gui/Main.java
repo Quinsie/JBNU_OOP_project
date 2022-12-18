@@ -1,4 +1,4 @@
-package main_pkg;
+package gui;
 
 public class Main
 {
