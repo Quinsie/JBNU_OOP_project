@@ -1,5 +1,7 @@
 package main_pkg;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -54,7 +56,8 @@ public class Frame extends JFrame
 		timetable.setLayout(null);
 		
 		JButton timetableButton = new JButton();
-		timetableButton.setText("시간표 수정 (시간표 추가 예정)");
+		timetableButton.setText("여기를 눌러 시간표 추가");
+		timetableButton.setFont(new Font("Malgun Gothic", Font.BOLD, 15));
 		timetable.add(timetableButton);
 		timetableButton.setBounds(0, 0, 575, 560);
 		
@@ -63,13 +66,14 @@ public class Frame extends JFrame
 	
 	public void createTimetableTitle() {
 		JPanel title = new JPanel();
-		title.setBounds(30, 20, 200, 20);
+		title.setBounds(30, 7, 1000, 50);
 		title.setLayout(null);
 		
 		JLabel text = new JLabel();
-		text.setText("시간표");
+		text.setText("시간표 설정 :: 하단 상자를 눌러주세요!");
+		text.setFont(new Font("Malgun Gothic", Font.BOLD, 25));
 		title.add(text);
-		text.setBounds(0, 0, 200, 20);
+		text.setBounds(0, 0, 1000, 50);
 		
 		this.add(title);
 	}
