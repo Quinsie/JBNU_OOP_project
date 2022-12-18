@@ -1,8 +1,6 @@
 package main_pkg;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -15,12 +13,19 @@ import javax.swing.JPanel;
 
 public class Frame extends JFrame
 {
-	private Font font1 = new Font("Malgun Gothic", Font.BOLD, 13);
-	private Font font2 = new Font("Malgun Gothic", Font.PLAIN, 11);
-	private Font font3 = new Font("Malgun Gothic", Font.BOLD, 15);
-	private Font font4 = new Font("Malgun Gothic", Font.BOLD, 25);
+	private final Font font1 = new Font("Malgun Gothic", Font.BOLD, 13);
+	private final Font font2 = new Font("Malgun Gothic", Font.PLAIN, 11);
+	private final Font font3 = new Font("Malgun Gothic", Font.BOLD, 15);
+	private final Font font4 = new Font("Malgun Gothic", Font.BOLD, 25);
 	
-	public Frame() {
+	JButton[] itemButton; // main screen selection button
+	JMenu[] menuList; // tool menubarlist
+	JMenuItem[] fileMenuItem, editMenuItem; // menubarlist components 
+	
+	JMenuBar menubar; // menubar
+	JPanel titlePanel, timetablePanel, statusPanel, buttonPanel; // panels
+	
+	public Frame() { // main frame
 		this.setTitle("수강신청 도우미");
 		this.setSize(1280, 720);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,6 +33,7 @@ public class Frame extends JFrame
 		this.setLocationRelativeTo(null);
 		this.setLayout(null);
 		
+		// methods
 		createMenu();
 		createTimetable();
 		createTimetableTitle();
@@ -37,94 +43,113 @@ public class Frame extends JFrame
 		this.setVisible(true);
 	}
 	
-	public void createMenu() {
-		JMenuBar mb = new JMenuBar();
-		JMenu fileMenu = new JMenu();
-		JMenu editMenu = new JMenu();
+	public void createMenu() { // create menubar
+		menubar = new JMenuBar();
+		menuList = new JMenu[2];
+		fileMenuItem = new JMenuItem[3];
+		editMenuItem = new JMenuItem[2];
 		
-		fileMenu.setText("File");
-		fileMenu.setFont(font1);
-		fileMenu.add(new JMenuItem("1"));
-		fileMenu.add(new JMenuItem("2"));
-		fileMenu.add(new JMenuItem("3"));
-		fileMenu.addSeparator();
+		for (int i = 0; i < fileMenuItem.length; i++) { // make and configure fileMenuItem
+			fileMenuItem[i] = new JMenuItem();
+			if (i == 0) {
+				fileMenuItem[i].setText("Save");
+			} else if (i == 1) {
+				fileMenuItem[i].setText("Load");
+			} else if (i == 2) {
+				fileMenuItem[i].setText("Exit");
+			}
+		}
 		
-		editMenu.setText("Edit");
-		editMenu.setFont(font1);
-		editMenu.add(new JMenuItem("1"));
-		editMenu.add(new JMenuItem("2"));
-		editMenu.addSeparator();
+		for (int i = 0; i < editMenuItem.length; i++) { // make and configure editMenuItem
+			editMenuItem[i] = new JMenuItem();
+			if (i == 0) {
+				editMenuItem[i].setText("Add");
+			} else if (i == 1) {
+				editMenuItem[i].setText("Remove");
+			}
+		}
 		
-		mb.add(fileMenu);
-		mb.add(editMenu);
+		for (int i = 0; i < menuList.length; i++) { // make menuList
+			menuList[i] = new JMenu();
+			menuList[i].setFont(font1);
+			
+			if (i == 0) { // fileMenu
+				menuList[i].setText("File");
+				for (int j = 0; j < fileMenuItem.length; j++) {
+					menuList[i].add(fileMenuItem[j]);
+				}
+			} else if (i == 1) { // editMenu
+				menuList[i].setText("Edit");
+				for (int j = 0; j < editMenuItem.length; j++) {
+					menuList[i].add(editMenuItem[j]);
+				}
+			}
+			
+			menuList[i].addSeparator();
+			menubar.add(menuList[i]);
+		}
 		
-		this.setJMenuBar(mb);
+		this.setJMenuBar(menubar);
 	}
 	
-	public void createTimetable() {
-		JPanel timetable = new JPanel();
-		timetable.setBounds(30, 70, 575, 560);
-		timetable.setLayout(null);
-		
-		JButton timetableButton = new JButton();
-		timetableButton.setText("여기를 눌러 시간표 추가");
-		timetableButton.setFont(font3);
-		timetable.add(timetableButton);
-		timetableButton.setBounds(0, 0, 575, 560);
-		
-		this.add(timetable);
-	}
-	
-	public void createTimetableTitle() {
-		JPanel title = new JPanel();
-		title.setBounds(30, 10, 1000, 50);
-		title.setLayout(null);
+	public void createTimetableTitle() { // create timetable title panel
+		titlePanel = new JPanel();
+		titlePanel.setBounds(30, 10, 1000, 50);
+		titlePanel.setLayout(null);
 		
 		JLabel text = new JLabel();
 		text.setText("시간표 설정 :: 하단 상자를 눌러주세요!");
 		text.setFont(font4);
-		title.add(text);
+		titlePanel.add(text);
 		text.setBounds(0, 0, 1000, 50);
 		
-		this.add(title);
+		this.add(titlePanel);
 	}
 	
-	public void createStatus() {
-		JPanel status = new JPanel();
-		status.setBackground(Color.gray);
-		status.setBounds(650, 70, 580, 560);
-		status.setLayout(new BorderLayout());
+	public void createTimetable() { // create timetable panel
+		timetablePanel = new JPanel();
+		timetablePanel.setBounds(30, 70, 575, 560);
+		timetablePanel.setLayout(null);
+		
+		JButton timetableButton = new JButton();
+		timetableButton.setText("여기를 눌러 시간표 추가");
+		timetableButton.setFont(font3);
+		timetablePanel.add(timetableButton);
+		timetableButton.setBounds(0, 0, 575, 560);
+		
+		this.add(timetablePanel);
+	}
+	
+	public void createStatus() { // create status panel
+		statusPanel = new JPanel();
+		statusPanel.setBackground(Color.gray);
+		statusPanel.setBounds(650, 70, 580, 560);
 		
 		JLabel text = new JLabel();
 		text.setText("여기에 시간표 검진 상태 출력");
 		text.setFont(font1);
-		text.setHorizontalAlignment(JLabel.CENTER);
-		status.add(text, BorderLayout.CENTER);
+		statusPanel.add(text);
 		
-		this.add(status);
+		this.add(statusPanel);
 	}
 	
-	public void createItemButton() {
-		JPanel buttonPanel = new JPanel();
+	public void createItemButton() { // create selection button panel
+		itemButton = new JButton[4];
+		buttonPanel = new JPanel();
 		buttonPanel.setBounds(650, 20, 580, 580);
 		buttonPanel.setLayout(null);
 		
 		for (int i = 0; i < 4; i++) {
-			JButton temp = new JButton();
+			itemButton[i] = new JButton();
 			
-			if (i == 0) {
-				temp.setText("시간표 검사");
-			} else if (i == 1) {
-				temp.setText("수강 가능 과목");
-			} else if (i == 2) {
-				temp.setText("과목 추천");
-			} else {
-				temp.setText("재수강 추천");
-			}
+			if (i == 0) itemButton[i].setText("시간표 검사");
+			else if (i == 1) itemButton[i].setText("수강 가능 과목");
+			else if (i == 2) itemButton[i].setText("과목 추천 분석");
+			else itemButton[i].setText("재수강 추천 분석");
 			
-			temp.setFont(font3);
-			buttonPanel.add(temp);
-			temp.setBounds(148 * i, 0, 135, 40);
+			itemButton[i].setFont(font1);
+			buttonPanel.add(itemButton[i]);
+			itemButton[i].setBounds(148 * i, 0, 135, 40);
 		}
 		
 		this.add(buttonPanel);
