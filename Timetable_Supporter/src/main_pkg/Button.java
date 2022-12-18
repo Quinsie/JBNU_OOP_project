@@ -10,8 +10,9 @@ import java.awt.RenderingHints;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
-public class Button extends JButton {
-	
+/* needed custom button class */
+public class Button extends JButton
+{
 	private static final long serialVersionUID = 4080594060520438244L;
 	
 	// constructor
@@ -32,6 +33,7 @@ public class Button extends JButton {
         decorate();
     }
 	
+    // Methods
 	protected void decorate() {
 		setBorderPainted(false);
 		setOpaque(false);

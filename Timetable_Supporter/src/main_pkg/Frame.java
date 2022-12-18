@@ -2,8 +2,9 @@ package main_pkg;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -11,14 +12,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-public class Frame extends JFrame
+public class Frame extends JFrame implements ActionListener
 {
 	private static final long serialVersionUID = 3953023869638367038L;
 	
-	private final Font font1 = new Font("Malgun Gothic", Font.BOLD, 13);
-	private final Font font2 = new Font("Malgun Gothic", Font.PLAIN, 11);
-	private final Font font3 = new Font("Malgun Gothic", Font.BOLD, 15);
-	private final Font font4 = new Font("Malgun Gothic", Font.BOLD, 25);
+	// Fields
+	public final static Font font1 = new Font("Malgun Gothic", Font.BOLD, 13);
+	public final static Font font2 = new Font("Malgun Gothic", Font.PLAIN, 11);
+	public final static Font font3 = new Font("Malgun Gothic", Font.BOLD, 15);
+	public final static Font font4 = new Font("Malgun Gothic", Font.BOLD, 25);
 	
 	Button[] itemButton; // main screen selection button
 	JMenu[] menuList; // tool menuBarlist
@@ -26,13 +28,15 @@ public class Frame extends JFrame
 	
 	JMenuBar menubar; // menuBar
 	JPanel titlePanel, timetablePanel, statusPanel, buttonPanel; // panels
+	Button timetableButton;
 	
+	// Constructor
 	public Frame() { // main frame
 		this.setTitle("수강신청 도우미");
-		this.setSize(1280, 720);
+		this.setSize(1280, 720); // default size
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		this.setLocationRelativeTo(null);
+		this.setResizable(false); // cannot resize this window
+		this.setLocationRelativeTo(null); // place this window to the middle of monitor
 		this.setLayout(null);
 		
 		// methods
@@ -45,6 +49,7 @@ public class Frame extends JFrame
 		this.setVisible(true);
 	}
 	
+	// Methods
 	public void createMenu() { // create menuBar
 		menubar = new JMenuBar();
 		menuList = new JMenu[2];
@@ -53,6 +58,8 @@ public class Frame extends JFrame
 		
 		for (int i = 0; i < fileMenuItem.length; i++) { // make and configure fileMenuItem
 			fileMenuItem[i] = new JMenuItem();
+			fileMenuItem[i].addActionListener(this);
+			
 			if (i == 0) {
 				fileMenuItem[i].setText("Save");
 			} else if (i == 1) {
@@ -113,9 +120,10 @@ public class Frame extends JFrame
 		timetablePanel.setBounds(30, 70, 575, 560);
 		timetablePanel.setLayout(null);
 		
-		Button timetableButton = new Button();
+		timetableButton = new Button();
 		timetableButton.setText("여기를 눌러 시간표 추가");
 		timetableButton.setFont(font3);
+		timetableButton.addActionListener(this);
 		timetablePanel.add(timetableButton);
 		timetableButton.setBounds(0, 0, 575, 560);
 		
@@ -143,6 +151,8 @@ public class Frame extends JFrame
 		
 		for (int i = 0; i < 4; i++) {
 			itemButton[i] = new Button();
+			itemButton[i].addActionListener(this);
+			//getContentPane().add(itemButton[i]);
 			
 			if (i == 0) itemButton[i].setText("시간표 검사");
 			else if (i == 1) itemButton[i].setText("수강 가능 과목");
@@ -155,5 +165,26 @@ public class Frame extends JFrame
 		}
 		
 		this.add(buttonPanel);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == fileMenuItem[2]) { // exit button
+			System.exit(0);
+		}
+		else if (e.getSource() == timetableButton) { // set timetable
+			Window subWindow = new Window(e.getActionCommand());
+		}
+		else if (e.getSource() == itemButton[1]) { // 수강 가능 과목 알림
+			Window subWindow = new Window(e.getActionCommand());
+		}
+		else if (e.getSource() == itemButton[2]) { // 과목 추천 분석
+			Window subWindow = new Window(e.getActionCommand());
+		}
+		else if (e.getSource() == itemButton[3]) { // 재수강 추천 분석
+			Window subWindow = new Window(e.getActionCommand());
+		}
+		
 	}
 }
