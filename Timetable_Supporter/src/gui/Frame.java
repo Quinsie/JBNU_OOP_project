@@ -30,7 +30,7 @@ public class Frame extends JFrame implements ActionListener
 	
 	JMenuBar menubar; // menuBar
 	JPanel titlePanel, timetableImagePanel, timetableButtonPanel, statusPanel, buttonPanel; // panels
-	JLabel statusText, timetableImage;
+	public JLabel statusText, timetableImage;
 	
 	// Constructor
 	public Frame() { // main frame
@@ -53,7 +53,7 @@ public class Frame extends JFrame implements ActionListener
 	}
 	
 	// Methods
-	public void createMenu() { // create menuBar
+	private void createMenu() { // create menuBar
 		menubar = new JMenuBar();
 		menuList = new JMenu[2];
 		fileMenuItem = new JMenuItem[3];
@@ -104,7 +104,7 @@ public class Frame extends JFrame implements ActionListener
 		this.setJMenuBar(menubar);
 	}
 	
-	public void createTimetableTitle() { // create timetable title panel
+	private void createTimetableTitle() { // create timetable title panel
 		titlePanel = new JPanel();
 		titlePanel.setBounds(30, 10, 190, 50);
 		titlePanel.setLayout(null);
@@ -118,7 +118,7 @@ public class Frame extends JFrame implements ActionListener
 		this.add(titlePanel);
 	}
 	
-	public void createTimetableImage() { // create timetable panel
+	private void createTimetableImage() { // create timetable panel
 		timetableImagePanel = new JPanel();
 		timetableImagePanel.setBounds(30, 70, 575, 560);
 		timetableImagePanel.setLayout(null);
@@ -134,7 +134,7 @@ public class Frame extends JFrame implements ActionListener
 		this.add(timetableImagePanel);
 	}
 	
-	public void createTimetableButton() {
+	private void createTimetableButton() {
 		timetableButton = new Button[2];
 		timetableButtonPanel = new JPanel();
 		timetableButtonPanel.setBounds(322, 20, 300, 50);
@@ -155,7 +155,7 @@ public class Frame extends JFrame implements ActionListener
 		this.add(timetableButtonPanel);
 	}
 	
-	public void createStatus() { // create status panel
+	private void createStatus() { // create status panel
 		statusPanel = new JPanel();
 		statusPanel.setBackground(new Color(173, 203, 216));
 		statusPanel.setBounds(650, 70, 580, 560);
@@ -168,7 +168,7 @@ public class Frame extends JFrame implements ActionListener
 		this.add(statusPanel);
 	}
 	
-	public void createItemButton() { // create selection button panel
+	private void createItemButton() { // create selection button panel
 		itemButton = new Button[4];
 		buttonPanel = new JPanel();
 		buttonPanel.setBounds(650, 20, 580, 580);
@@ -206,10 +206,8 @@ public class Frame extends JFrame implements ActionListener
 	}
 	
 	private void setTimetable(ActionEvent e) {
-		SetTimetableWindow wtemp = new SetTimetableWindow(e.getActionCommand());
-		timetableImage.setText("시간표 변경!");
-		timetableImage.setVerticalAlignment(JLabel.CENTER);
-		timetableImage.setHorizontalAlignment(JLabel.CENTER);
+		@SuppressWarnings("unused")
+		SetTimetableWindow wtemp = new SetTimetableWindow(this);
 	}
 	private void setVoidTimetable() { 
 		timetableImage.setText("시간표를 추가해주세요!");
@@ -220,12 +218,15 @@ public class Frame extends JFrame implements ActionListener
 		statusText.setText("분석 완료!");
 	}
 	private void numberClass(ActionEvent e) {
+		@SuppressWarnings("unused")
 		NumberClassWindow wtemp = new NumberClassWindow(e.getActionCommand());
 	}
 	private void recommendClass(ActionEvent e) {
+		@SuppressWarnings("unused")
 		RecommendClassWindow wtemp = new RecommendClassWindow(e.getActionCommand());
 	}
 	private void retryClass(ActionEvent e) {
+		@SuppressWarnings("unused")
 		RetryClassWindow wtemp = new RetryClassWindow(e.getActionCommand());
 	}
 
