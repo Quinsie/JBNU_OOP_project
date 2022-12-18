@@ -1,5 +1,7 @@
 package main_pkg;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -12,6 +14,11 @@ import javax.swing.JPanel;
 
 public class Frame extends JFrame
 {
+	private Font font1 = new Font("Malgun Gothic", Font.BOLD, 13);
+	private Font font2 = new Font("Malgun Gothic", Font.PLAIN, 11);
+	private Font font3 = new Font("Malgun Gothic", Font.BOLD, 15);
+	private Font font4 = new Font("Malgun Gothic", Font.BOLD, 25);
+	
 	public Frame() {
 		this.setTitle("수강신청 도우미");
 		this.setSize(1280, 720);
@@ -23,6 +30,7 @@ public class Frame extends JFrame
 		createMenu();
 		createTimetable();
 		createTimetableTitle();
+		createStatus();
 		
 		this.setVisible(true);
 	}
@@ -33,15 +41,16 @@ public class Frame extends JFrame
 		JMenu editMenu = new JMenu();
 		
 		fileMenu.setText("File");
+		fileMenu.setFont(font1);
 		fileMenu.add(new JMenuItem("1"));
 		fileMenu.add(new JMenuItem("2"));
 		fileMenu.add(new JMenuItem("3"));
 		fileMenu.addSeparator();
 		
 		editMenu.setText("Edit");
+		editMenu.setFont(font1);
 		editMenu.add(new JMenuItem("1"));
 		editMenu.add(new JMenuItem("2"));
-		editMenu.add(new JMenuItem("3"));
 		editMenu.addSeparator();
 		
 		mb.add(fileMenu);
@@ -57,7 +66,7 @@ public class Frame extends JFrame
 		
 		JButton timetableButton = new JButton();
 		timetableButton.setText("여기를 눌러 시간표 추가");
-		timetableButton.setFont(new Font("Malgun Gothic", Font.BOLD, 15));
+		timetableButton.setFont(font3);
 		timetable.add(timetableButton);
 		timetableButton.setBounds(0, 0, 575, 560);
 		
@@ -71,10 +80,25 @@ public class Frame extends JFrame
 		
 		JLabel text = new JLabel();
 		text.setText("시간표 설정 :: 하단 상자를 눌러주세요!");
-		text.setFont(new Font("Malgun Gothic", Font.BOLD, 25));
+		text.setFont(font4);
 		title.add(text);
 		text.setBounds(0, 0, 1000, 50);
 		
 		this.add(title);
+	}
+	
+	public void createStatus() {
+		JPanel status = new JPanel();
+		status.setBackground(Color.gray);
+		status.setBounds(650, 70, 580, 560);
+		status.setLayout(new BorderLayout());
+		
+		JLabel text = new JLabel();
+		text.setText("여기에 시간표 검진 상태 출력");
+		text.setFont(font1);
+		text.setHorizontalAlignment(JLabel.CENTER);
+		status.add(text, BorderLayout.CENTER);
+		
+		this.add(status);
 	}
 }
