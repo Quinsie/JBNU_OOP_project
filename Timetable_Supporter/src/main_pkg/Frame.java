@@ -28,6 +28,7 @@ public class Frame extends JFrame implements ActionListener
 	
 	JMenuBar menubar; // menuBar
 	JPanel titlePanel, timetablePanel, statusPanel, buttonPanel; // panels
+	JLabel statusText;
 	Button timetableButton;
 	
 	// Constructor
@@ -135,10 +136,10 @@ public class Frame extends JFrame implements ActionListener
 		statusPanel.setBackground(Color.gray);
 		statusPanel.setBounds(650, 70, 580, 560);
 		
-		JLabel text = new JLabel();
-		text.setText("여기에 시간표 검진 상태 출력");
-		text.setFont(font1);
-		statusPanel.add(text);
+		statusText = new JLabel();
+		statusText.setText("여기에 시간표 검진 상태 출력");
+		statusText.setFont(font1);
+		statusPanel.add(statusText);
 		
 		this.add(statusPanel);
 	}
@@ -175,6 +176,9 @@ public class Frame extends JFrame implements ActionListener
 		}
 		else if (e.getSource() == timetableButton) { // set timetable
 			Window subWindow = new Window(e.getActionCommand());
+		}
+		else if (e.getSource() == itemButton[0]) {
+			statusText.setText("분석 완료!");
 		}
 		else if (e.getSource() == itemButton[1]) { // 수강 가능 과목 알림
 			Window subWindow = new Window(e.getActionCommand());
