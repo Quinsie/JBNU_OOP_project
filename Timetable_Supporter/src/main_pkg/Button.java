@@ -49,11 +49,11 @@ public class Button extends JButton
 	    graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 	    if (getModel().isArmed()) {
-	        graphics.setColor(Color.GRAY.darker());
+	        graphics.setColor(new Color(15, 138, 191).darker());
 	    } else if (getModel().isRollover()) {
-	        graphics.setColor(Color.GRAY.brighter());
+	        graphics.setColor(new Color(15, 138, 191).brighter());
 	    } else {
-	        graphics.setColor(Color.GRAY);
+	        graphics.setColor(new Color(141, 191, 214));
 	    }
 
 	    graphics.fillRoundRect(0, 0, width, height, 10, 10);

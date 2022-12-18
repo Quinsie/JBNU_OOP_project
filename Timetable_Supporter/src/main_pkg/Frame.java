@@ -22,14 +22,13 @@ public class Frame extends JFrame implements ActionListener
 	public final static Font font3 = new Font("Malgun Gothic", Font.BOLD, 15);
 	public final static Font font4 = new Font("Malgun Gothic", Font.BOLD, 25);
 	
-	Button[] itemButton; // main screen selection button
+	Button[] itemButton, timetableButton; // main screen selection button
 	JMenu[] menuList; // tool menuBarlist
 	JMenuItem[] fileMenuItem, editMenuItem; // menuBarlist components 
 	
 	JMenuBar menubar; // menuBar
-	JPanel titlePanel, timetablePanel, statusPanel, buttonPanel; // panels
-	JLabel statusText;
-	Button timetableButton;
+	JPanel titlePanel, timetableImagePanel, timetableButtonPanel, statusPanel, buttonPanel; // panels
+	JLabel statusText, timetableImage;
 	
 	// Constructor
 	public Frame() { // main frame
@@ -42,8 +41,9 @@ public class Frame extends JFrame implements ActionListener
 		
 		// methods
 		createMenu();
-		createTimetable();
+		createTimetableImage();
 		createTimetableTitle();
+		createTimetableButton();
 		createStatus();
 		createItemButton();
 		
@@ -104,36 +104,58 @@ public class Frame extends JFrame implements ActionListener
 	
 	public void createTimetableTitle() { // create timetable title panel
 		titlePanel = new JPanel();
-		titlePanel.setBounds(30, 10, 1000, 50);
+		titlePanel.setBounds(30, 10, 190, 50);
 		titlePanel.setLayout(null);
 		
 		JLabel text = new JLabel();
-		text.setText("시간표 설정 :: 하단 상자를 눌러주세요!");
+		text.setText("수강신청 도우미");
 		text.setFont(font4);
 		titlePanel.add(text);
-		text.setBounds(0, 0, 1000, 50);
+		text.setBounds(0, 0, 300, 50);
 		
 		this.add(titlePanel);
 	}
 	
-	public void createTimetable() { // create timetable panel
-		timetablePanel = new JPanel();
-		timetablePanel.setBounds(30, 70, 575, 560);
-		timetablePanel.setLayout(null);
+	public void createTimetableImage() { // create timetable panel
+		timetableImagePanel = new JPanel();
+		timetableImagePanel.setBounds(30, 70, 575, 560);
+		timetableImagePanel.setLayout(null);
 		
-		timetableButton = new Button();
-		timetableButton.setText("여기를 눌러 시간표 추가");
-		timetableButton.setFont(font3);
-		timetableButton.addActionListener(this);
-		timetablePanel.add(timetableButton);
-		timetableButton.setBounds(0, 0, 575, 560);
+		timetableImage = new JLabel();
+		timetableImage.setFont(font3);
+		timetableImage.setOpaque(true);
+		timetableImage.setBackground(new Color(173, 203, 216));
+		setVoidTimetable();
+		timetableImagePanel.add(timetableImage);
+		timetableImage.setBounds(0, 0, 575, 560);
 		
-		this.add(timetablePanel);
+		this.add(timetableImagePanel);
+	}
+	
+	public void createTimetableButton() {
+		timetableButton = new Button[2];
+		timetableButtonPanel = new JPanel();
+		timetableButtonPanel.setBounds(322, 20, 300, 50);
+		timetableButtonPanel.setLayout(null);
+		
+		for (int i = 0; i < timetableButton.length; i++) {
+			timetableButton[i] = new Button();
+			timetableButton[i].addActionListener(this);
+			
+			if (i == 0) timetableButton[i].setText("수정");
+			else timetableButton[i].setText("초기화");
+			
+			timetableButton[i].setFont(font1);
+			timetableButtonPanel.add(timetableButton[i]);
+			timetableButton[i].setBounds(148 * i, 0, 135, 40);
+		}
+		
+		this.add(timetableButtonPanel);
 	}
 	
 	public void createStatus() { // create status panel
 		statusPanel = new JPanel();
-		statusPanel.setBackground(Color.gray);
+		statusPanel.setBackground(new Color(173, 203, 216));
 		statusPanel.setBounds(650, 70, 580, 560);
 		
 		statusText = new JLabel();
@@ -150,7 +172,7 @@ public class Frame extends JFrame implements ActionListener
 		buttonPanel.setBounds(650, 20, 580, 580);
 		buttonPanel.setLayout(null);
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < itemButton.length; i++) {
 			itemButton[i] = new Button();
 			itemButton[i].addActionListener(this);
 			//getContentPane().add(itemButton[i]);
@@ -169,17 +191,14 @@ public class Frame extends JFrame implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { // button action
 		// TODO Auto-generated method stub
 		if (e.getSource() == fileMenuItem[2]) { // exit button
 			System.exit(0);
 		}
-		else if (e.getSource() == timetableButton) { // set timetable
-			Window subWindow = new Window(e.getActionCommand());
-		}
-		else if (e.getSource() == itemButton[0]) {
-			statusText.setText("분석 완료!");
-		}
+		else if (e.getSource() == timetableButton[0]) setTimetable();
+		else if (e.getSource() == timetableButton[1]) setVoidTimetable();
+		else if (e.getSource() == itemButton[0]) analyze();
 		else if (e.getSource() == itemButton[1]) { // 수강 가능 과목 알림
 			Window subWindow = new Window(e.getActionCommand());
 		}
@@ -190,5 +209,21 @@ public class Frame extends JFrame implements ActionListener
 			Window subWindow = new Window(e.getActionCommand());
 		}
 		
+	}
+	
+	private void analyze() {
+		statusText.setText("분석 완료!");
+	}
+	
+	private void setTimetable() {
+		timetableImage.setText("시간표 변경!");
+		timetableImage.setVerticalAlignment(JLabel.CENTER);
+		timetableImage.setHorizontalAlignment(JLabel.CENTER);
+	}
+	
+	private void setVoidTimetable() { 
+		timetableImage.setText("시간표를 추가해주세요!");
+		timetableImage.setVerticalAlignment(JLabel.CENTER);
+		timetableImage.setHorizontalAlignment(JLabel.CENTER);
 	}
 }
