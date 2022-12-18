@@ -13,16 +13,18 @@ import javax.swing.JPanel;
 
 public class Frame extends JFrame
 {
+	private static final long serialVersionUID = 3953023869638367038L;
+	
 	private final Font font1 = new Font("Malgun Gothic", Font.BOLD, 13);
 	private final Font font2 = new Font("Malgun Gothic", Font.PLAIN, 11);
 	private final Font font3 = new Font("Malgun Gothic", Font.BOLD, 15);
 	private final Font font4 = new Font("Malgun Gothic", Font.BOLD, 25);
 	
-	JButton[] itemButton; // main screen selection button
-	JMenu[] menuList; // tool menubarlist
-	JMenuItem[] fileMenuItem, editMenuItem; // menubarlist components 
+	Button[] itemButton; // main screen selection button
+	JMenu[] menuList; // tool menuBarlist
+	JMenuItem[] fileMenuItem, editMenuItem; // menuBarlist components 
 	
-	JMenuBar menubar; // menubar
+	JMenuBar menubar; // menuBar
 	JPanel titlePanel, timetablePanel, statusPanel, buttonPanel; // panels
 	
 	public Frame() { // main frame
@@ -43,7 +45,7 @@ public class Frame extends JFrame
 		this.setVisible(true);
 	}
 	
-	public void createMenu() { // create menubar
+	public void createMenu() { // create menuBar
 		menubar = new JMenuBar();
 		menuList = new JMenu[2];
 		fileMenuItem = new JMenuItem[3];
@@ -111,7 +113,7 @@ public class Frame extends JFrame
 		timetablePanel.setBounds(30, 70, 575, 560);
 		timetablePanel.setLayout(null);
 		
-		JButton timetableButton = new JButton();
+		Button timetableButton = new Button();
 		timetableButton.setText("여기를 눌러 시간표 추가");
 		timetableButton.setFont(font3);
 		timetablePanel.add(timetableButton);
@@ -134,13 +136,13 @@ public class Frame extends JFrame
 	}
 	
 	public void createItemButton() { // create selection button panel
-		itemButton = new JButton[4];
+		itemButton = new Button[4];
 		buttonPanel = new JPanel();
 		buttonPanel.setBounds(650, 20, 580, 580);
 		buttonPanel.setLayout(null);
 		
 		for (int i = 0; i < 4; i++) {
-			itemButton[i] = new JButton();
+			itemButton[i] = new Button();
 			
 			if (i == 0) itemButton[i].setText("시간표 검사");
 			else if (i == 1) itemButton[i].setText("수강 가능 과목");
